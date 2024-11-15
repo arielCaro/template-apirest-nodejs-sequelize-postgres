@@ -1,0 +1,4 @@
+npm init -y
+npm i express morgan sequelize pg pg-hstore
+
+npm run dev (ejecutar servidor en forma local)
