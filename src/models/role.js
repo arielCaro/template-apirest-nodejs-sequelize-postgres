@@ -1,7 +1,8 @@
-import { DataTypes } from  'sequelize';
-import { sequelize } from './db/database.js';
+import { DataTypes } from  "sequelize";
+import { sequelize } from "../db/database.js";
 
-export const Role = sequelize.define('TbRole', { 
+export const Role = sequelize.define(
+    "TbRole", { 
     Id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -20,4 +21,4 @@ export const Role = sequelize.define('TbRole', {
         type: DataTypes.BOOLEAN,
         allowNull: false,
     }
-})
+});
