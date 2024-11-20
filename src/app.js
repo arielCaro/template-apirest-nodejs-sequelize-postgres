@@ -13,13 +13,13 @@ const swaggerOptions = {
         swaggerDefinition: {
         myapp: '3.0.0',
         info: {
-            title: 'My API',
+            title: 'Template API REST - EXPRESS - SEQUELIZE - POSTGRES',
             version: '1.0.0',
             description: 'API documentation',
         },
         servers: [
             {
-            url: 'http://localhost:3000',
+            url: 'http://localhost:4000',
             },
         ],
         },
