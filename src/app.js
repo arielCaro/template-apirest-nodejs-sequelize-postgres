@@ -1,7 +1,7 @@
 import express from "express";
 import morgan from "morgan";
-import swaggerUi from "swagger-ui-express";
-import swaggerJsDoc from "swagger-jsdoc";
+import swaggerJSDoc  from "swagger-jsdoc";
+import swaggerUi  from "swagger-ui-express"
 // Import routes
 import companyRoutes from "./routes/company.Routes.js";
 import rolesRoutes from "./routes/role.Routes.js";
@@ -25,10 +25,6 @@ const swaggerOptions = {
         },
         apis: ['./routes/*.js'], // files containing annotations as above
     };
-    const swaggerDocs = swaggerJsDoc(swaggerOptions);
-    app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-
 
 // Middlewares
 app.use(morgan("dev"));
@@ -37,5 +33,6 @@ app.use(express.json());
 app.use("/api/companies", companyRoutes);
 app.use("/api/roles", rolesRoutes);
 app.use("/api/Users", usersRoles);
-
+const swaggerDocs = swaggerJSDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 export default app;
