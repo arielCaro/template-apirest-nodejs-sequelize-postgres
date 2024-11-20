@@ -1,17 +1,24 @@
 import { Session } from '../models/session.js';
 import { User } from '../models/user.js';
+import { jwt } from "jsonwebtoken";
 
-var dateNow = Date.now();
+const dateNow = Date.now();
+const secretKey = "secret";
 
 export async function Auth(req, res) {
     try {
         const { Email, Password, IdApp  } = req.body;
+        if (!Email || !Password || !IdApp) {
+            return res.status(400).json({ message: "Username, password and Application are required" });
+        }
         const user = await User.findOne({
-            where: { Email, Password },
+            where: { Email, Password,  IdApp},
         });
+        if (!user){
+            return res.status(401).json({ message: "Authentication failed" });
+        }
         /** Generate Token **/
-        const token = "";
-
+        const token = jwt.sign({ user }, secretKey, { expiresIn: "1h" });;
 
         let sessionNew = {
             SessionOn: dateNow,
@@ -21,10 +28,14 @@ export async function Auth(req, res) {
             TokenBearer: token.key,
             AppId: IdApp
         }
-
+        user.password = "";
         /** Create Session **/
-        const newSession = Session.create(sessionNew);
-        res.status(201).json(newSession);
+        const newSession = await Session.create(sessionNew);
+        return res.status(200).json({
+            token: token,
+            user: user,
+            message: "Success",
+        });
     } catch (error) {
         return res.status(500).json({
             message: error.message
@@ -78,3 +89,4 @@ export async function Get(req, res) {
         }); 
     }
 }
+

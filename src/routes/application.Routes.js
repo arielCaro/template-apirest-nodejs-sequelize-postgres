@@ -6,14 +6,14 @@ import {
     Delete,
     Get,
 } from "../controllers/application.controller.js";
-
+import { verifyToken } from "../security/security.js";
 const router = Router();
 
 // Routes
-router.post("/", Create);
-router.put("/:id", Update);
-router.delete("/:id", Delete);
-router.get("/", GetAll);
-router.get("/:id", Get);
+router.post("/", verifyToken, Create);
+router.put("/:id", verifyToken, Update);
+router.delete("/:id", verifyToken, Delete);
+router.get("/", verifyToken, GetAll);
+router.get("/:id", verifyToken, Get);
 
 export default router;
