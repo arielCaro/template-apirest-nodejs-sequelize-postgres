@@ -1,9 +1,23 @@
 import { User } from "../models/user.js";
 
+const attrib = [ "id", "name", "lastName", "email",
+    "password", "active", "dateCreated",
+    "dateModified", "idRole", "idCompany", "phone",
+    "phoneMobile", "codePhoneCountry" ]
+
 export async function Create(req, res) {
     try {
-        const { id } = req.param;
-        res.json();
+        const { Name, LastName, Email,
+                Password, Active, DateCreated,
+                DateModified, IdRole, IdCompany, Phone,
+                PhoneMobile, CodePhoneCountry } = req.param;
+        const newUser = await User.Create({
+            Name, LastName, Email,
+                Password, Active, DateCreated,
+                DateModified, IdRole, IdCompany, Phone,
+                PhoneMobile, CodePhoneCountry
+        })
+        res.json(newUser);
     } catch(error){
         return res.status(500).json({
             message: error.message
@@ -14,7 +28,13 @@ export async function Create(req, res) {
 export async function Update(req, res) {
     const { id } = req.param;
     try {
-        res.json();
+        const user = await User.findOne({
+            attribute: attrib,
+            where: { id },
+        });
+        user.set(req.body);
+        await user.save();
+        res.json(user);
     } catch(error){
         return res.status(500).json({
             message: error.message
@@ -25,7 +45,11 @@ export async function Update(req, res) {
 export async function Get(req, res) {
     const { id } = req.param;
     try {
-        res.json();
+        const user = await User.findOne({
+            attribute: attrib,
+            where: { id },
+        })
+        res.json(user);
     } catch(error){
         return res.status(500).json({
             message: error.message
@@ -35,7 +59,11 @@ export async function Get(req, res) {
 
 export async function GetAll(req, res) {
     try {
-        res.json();
+        const users = await User.findAll({
+            attribute: attrib,
+            order: [["Id", "DESC"]],
+        });
+        res.json(users);
     } catch(error){
         return res.status(500).json({
             message: error.message
@@ -46,7 +74,10 @@ export async function GetAll(req, res) {
 export async function Delete(req, res) {
     const { id } = req.param;
     try {
-        res.json();
+        await User.destroy({
+            where: { id },
+        });
+        res.sendStatus(204);
     } catch(error){
         return res.status(500).json({
             message: error.message

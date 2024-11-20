@@ -1,7 +1,5 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db/database.js";
-import { User } from "./user.js";
-
 
 export const Company = sequelize.define(
     "TbCompany",{
@@ -44,13 +42,6 @@ export const Company = sequelize.define(
             allowNull:false,
         }
     }
-    
 );
 
-Company.hasMany(User, {
-    foreinKey: "IdCompany",
-    sourceKey: "Id"
-});
-User.belongsTo(Company, {
-    foreinKey: "IdCompany", targetId: "Id"
-});
+

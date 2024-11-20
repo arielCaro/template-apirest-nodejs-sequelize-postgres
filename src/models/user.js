@@ -1,60 +1,81 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../db/database.js";
+import { Role } from "./role.js";
+import { Company } from "./company.js";
 
 export const User = sequelize.define(
     "TbUser",
     {
-        Id: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
+        Id:{
+            type:DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true,
+            AllowNull: false,
+        }
     },
     {
-        Name: DataTypes.STRING,
-        AllowNull: false,
+        Name: {
+            type: DataTypes.STRING,
+            AllowNull: false,
+        }
     },
     {
-        LastName: DataTypes.STRING,
-        AllowNull: false,
+        LastName: {
+            type:DataTypes.STRING,
+            AllowNull: false,
+        }
     },
     {
-        Email: DataTypes.STRING,
-        AllowNull: false,
+        Email: {
+            type:DataTypes.STRING,
+            AllowNull: false,
+        }
     },
     {
-        Password: DataTypes.STRING,
-        AllowNull: false,
+        Password: {
+            type:DataTypes.STRING,
+            AllowNull: false,
+        }
     },
     {
-        Active: DataTypes.BOOLEAN,
-        AllowNull:false,
+        Active: {
+            type:DataTypes.BOOLEAN,
+            AllowNull:false,
+        }
+        
     },
     {
-        DateCreated: DataTypes.DATE,
-        AllowNull: false,
+        DateCreated: {
+            type:DataTypes.DATE,
+            AllowNull: false,
+        }
     },
     {
-        DateModified: DataTypes.DATE,
-        AllowNull:false,
-    },
-    /*{
-        IdCompany: DataTypes.INTEGER,
-        AllowNull: false,
-    },*/
-    {
-        IdRole: DataTypes.INTEGER,
-        AllowNull: false,
+        DateModified:{
+            type:DataTypes.DATE,
+            AllowNull:false,
+        }
     },
     {
-        Phone: DataTypes.INTEGER,
-        AllowNull: false,
+        Phone: {
+            type:DataTypes.INTEGER,
+            AllowNull: false,
+        }
+        
     },
     {
-        PhoneMobile: DataTypes.INTEGER,
-        AllowNull: false,
+        PhoneMobile: {
+            type:DataTypes.INTEGER,
+            AllowNull: false,
+        }
+        
     },
     {
-        CodePhoneCountry: DataTypes.STRING,
-        AllowNull: false,
+        CodePhoneCountry: {
+            type:DataTypes.STRING,
+            AllowNull: false,
+        }
+        
     },
+    
 );
-

@@ -1,8 +1,9 @@
 import { DataTypes } from  "sequelize";
 import { sequelize } from "../db/database.js";
 
+
 export const Role = sequelize.define(
-    "TbRole", { 
+    "TbRole", {
     Id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -22,3 +23,4 @@ export const Role = sequelize.define(
         allowNull: false,
     }
 });
+
