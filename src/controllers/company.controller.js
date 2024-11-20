@@ -6,7 +6,7 @@ export async function Create(req, res) {
         const newCompany = await Company.create({
             Name, Address, ContactPhone, Active, DateCreated, DateModified, UserCreated, UserModifield
         });
-        res.json(newCompany);
+        return res.json(newCompany);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -18,7 +18,7 @@ export async function GetAll(req, res) {
         attributes: ["Id", "Name", "Address", "ContactPhone", "Active", "DateCreated", "DateModified", "UserCreated", "UserModifield"],
         order: [["id", "DESC"]],
         });
-        res.json(companies);
+        return res.json(companies);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -26,20 +26,14 @@ export async function GetAll(req, res) {
 
 export async function Update(req, res) {
     const { id } = req.params;
-    // const { projectid, name, done } = req.body;
     try {
-        // const updatedTask = await Task.update(
-        //   { name, done, projectid },
-        //   { where: { id } }
-        // );
-
         const company = await Company.findOne({
         attributes: ["Id", "Name", "Address", "ContactPhone", "Active", "DateCreated", "DateModified", "UserCreated", "UserModifield"],
         where: { id },
         });
         company.set(req.body);
         await company.save();
-        res.json(company);
+        return res.json(company);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
@@ -65,7 +59,7 @@ export async function Get(req, res) {
         where: { id },
         attributes: ["Id", "Name", "Address", "ContactPhone", "Active", "DateCreated", "DateModified", "UserCreated", "UserModifield"],
         });
-        res.json(company);
+        return res.json(company);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }

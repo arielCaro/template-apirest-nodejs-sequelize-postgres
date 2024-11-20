@@ -17,7 +17,7 @@ export async function Create(req, res) {
                 DateModified, IdRole, IdCompany, Phone,
                 PhoneMobile, CodePhoneCountry
         })
-        res.json(newUser);
+        return res.status(200).json(newUser);
     } catch(error){
         return res.status(500).json({
             message: error.message
@@ -34,7 +34,7 @@ export async function Update(req, res) {
         });
         user.set(req.body);
         await user.save();
-        res.json(user);
+        return res.status(200).json(user);
     } catch(error){
         return res.status(500).json({
             message: error.message
@@ -48,8 +48,8 @@ export async function Get(req, res) {
         const user = await User.findOne({
             attribute: attrib,
             where: { id },
-        })
-        res.json(user);
+        });
+        return res.status(200).json(user);
     } catch(error){
         return res.status(500).json({
             message: error.message
@@ -63,7 +63,7 @@ export async function GetAll(req, res) {
             attribute: attrib,
             order: [["Id", "DESC"]],
         });
-        res.json(users);
+        return res.status(200).json(users);
     } catch(error){
         return res.status(500).json({
             message: error.message

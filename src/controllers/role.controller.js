@@ -6,7 +6,7 @@ export async function Create(req, res) {
         const newRole = await Role.create({
             Name, Description, Active
         });
-        res.json(newRole);
+        return res.status(201).json(newRole);
     } catch(error){
         return res.status(500).json({ message: error.message })
     }
@@ -18,7 +18,7 @@ export async function GetAll(req, resp) {
             attributes: ["Id", "Name", "Description", "Active"],
             order: [["id", "DESC"]],
         });
-        res.json(roles)
+        return res.status(200).json(roles)
     } catch(error){
         return res.status(500).json({message: error.message});
     }
@@ -33,7 +33,7 @@ export async function Update(req,res){
         });
         role.set(req.body);
         await role.save();
-        res.json(role);
+        return res.status(200).json(role);
     } catch(error){
         return res.status(500).json({
             message: error.message
@@ -62,7 +62,7 @@ export async function Get(req,res) {
             where: { id },
             attribute: ["Id", "Name", "Description", "Active"]
         });
-        res.json(role);
+        res.status(200).json(role);
     } catch(error){
         return res.status(500).json({
             message: error.message
