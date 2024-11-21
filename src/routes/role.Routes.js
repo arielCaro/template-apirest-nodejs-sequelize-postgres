@@ -10,7 +10,15 @@ import { verifyToken } from "../security/security.js";
 
 const router = Router();
 
+
+/**
+ * @swagger
+ * /api/Roles
+ *  post:
+ *     create roles new.
+ */
 router.post("/", verifyToken, Create);
+
 router.put("/:id", verifyToken, Update);
 router.delete("/:id", verifyToken, Delete);
 router.get("/:id", verifyToken, Get);
